@@ -30,10 +30,10 @@ My pipeline contains 6 steps
      - <img src="./test_images_3rd/3rd_solidYellowCurve.jpg" width="680" alt="Solid Yellow Curve" />
      - <img src="./test_images_3rd/3rd_whiteCarLaneSwitch.jpg" width="680" alt="White Car Lane Switch" />
      
-> My intention of using 3rd order line fitting is to capture  the curve.
-> But in reality, when there are discrete lines, my method cannot capture the line correctly.
+> My intention of using the 3rd order line fitting is to capture the curve.
+> But in reality, when there are discrete lines, my method cannot capture the curves or lines correctly.
 > I need to spend more time on the algorithm in the future.
-> Because of this, the final output was using 1st order fitting.
+> Because of this, the final output was using the 1st order fitting.
 
 
 5. Use the __k and b__ found in the 1st order fitting. I sweep the x pixel from 0 to `xMax` and find y.
@@ -43,3 +43,15 @@ My pipeline contains 6 steps
    - [x] The continuous line uses 1st order fitting
    - [ ] The curve uses 3rd order fitting
    - **Return** the overlaid picture using 1st order fitting
+   
+ ### II. Shortcomings
+1. Only detect straight lines, cannot find the curve
+2. The shadow of the power grid might be captured
+3. Not tested on the wet road
+4. The detected lane line image are shaking.
+
+### III. Possible improvement
+1. To caputer the curve, I can create segments on the image and using different methods in each segment.
+   - Near-field using 1st order fitting, only considear straight lines.
+   - Far-field using 3rd order fitting, which can caputer the curves.
+2. To recude the shaking of the detected lane line, I can create a tolarance if the slope __k__ after the 1sr order fitting is inside the tolarance then use the same slope for the current image.
