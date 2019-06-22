@@ -5,12 +5,14 @@
   - [2019-6-20_Lane_Line_Project_JLI.ipynb](./2019-6-20_Lane_Line_Project_JLI.ipynb)
 - [x] A writeup report using markdown
   - [2019-06-20_Lane_Line_Doc_JLI.md](./2019-06-20_Lane_Line_Doc_JLI.md)
+- [output images](./test_images_output)
+- [output videos](./test_videos_output)
 
 ## Sample output
 - **Image** : [Solid Yellow Curve](./test_images_output/output_solidYellowCurve.jpg)
 <img src="./test_images_output/output_solidYellowCurve.jpg" width="480" alt="Solid Yellow Curve" />
 
-- **Video** : [Solid White Right](./test_videos_output/output_solidYellowLeft.mp4)
+- **Video** : [Solid White Right](./test_videos_output/output_solidWhiteRight.mp4)
 
 ## Reflections
 ### I. Project pipeline
@@ -23,7 +25,7 @@ My pipeline contains 6 steps
    - Array format [[x1,y1],[x2,y2],...,[xn,yn]]
 3. Using `numpy.zip` function to reanage the array
    - New array format x = [x1,x2,...xn]; y = [y1,y2,...yn]
-4. Find the tenderline between __x__ and __y__.
+4. Find the trendline between __x__ and __y__.
    - Try two different order of `numpy.ployfit`
      - First order _np.polyfit(leftLineX,leftLineY,1)_ # __y = kx + b__ # result [k,b]
      - ~~Third order _np.polyfit(leftLineX,leftLineY,3)_ # __y = ax^3 + bx^2 + cx^1 + d__ # result [a,b,c,d]~~
@@ -42,16 +44,16 @@ My pipeline contains 6 steps
    - [ ] Only the lane line was detected
    - [x] The continuous line uses 1st order fitting
    - [ ] The curve uses 3rd order fitting
-   - **Return** the overlaid picture using 1st order fitting
+   - **Return the overlaid picture using 1st order fitting**
    
- ### II. Shortcomings
+### II. Shortcomings
 1. Only detect straight lines, cannot find the curve
 2. The shadow of the power grid might be captured
 3. Not tested on the wet road
-4. The detected lane line image are shaking.
+4. The detected lane line image is shaking.
 
 ### III. Possible improvement
-1. To caputer the curve, I can create segments on the image and using different methods in each segment.
-   - Near-field using 1st order fitting, only considear straight lines.
-   - Far-field using 3rd order fitting, which can caputer the curves.
-2. To recude the shaking of the detected lane line, I can create a tolarance if the slope __k__ after the 1sr order fitting is inside the tolarance then use the same slope for the current image.
+1. To capture the curve, I can create segments on the image and using different methods in each segment.
+   - Near-field using 1st order fitting, only consider straight lines.
+   - Far-field using 3rd order fitting, which can capture the curves.
+2. To reduce the shaking of the detected lane line, I can create a tolerance, if the slope __k__ after the 1sr order fitting is inside the tolerance then use the same slope for the current image.
